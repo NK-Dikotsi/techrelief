@@ -590,6 +590,37 @@
             font-size: 14px;
         }
         
+        /* New styles for left-aligned team section */
+        #team .section-content {
+            max-width: none;
+            width: 100%;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        #team .section-content h1 {
+            text-align: left;
+            width: 100%;
+        }
+        
+        #team .section-content p {
+            text-align: left;
+            width: 100%;
+        }
+        
+        /* Center team member images */
+        .team-member {
+            text-align: center;
+        }
+        
+        .member-photo-wrapper {
+            margin: 0 auto 20px;
+        }
+        
+        .member-socials {
+            justify-content: center;
+        }
+        
         /* Responsive styles */
         @media screen and (max-width: 1024px) {
             .timeline-container {
@@ -726,6 +757,33 @@
             #team {
                 height: auto;
                 min-height: 100vh;
+            }
+            
+            /* Keep team text left-aligned on mobile */
+            #team .section-content {
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            #team .section-content h1 {
+                text-align: left;
+            }
+            
+            #team .section-content p {
+                text-align: left;
+            }
+            
+            /* Center team member images on mobile */
+            .team-member {
+                text-align: center;
+            }
+            
+            .member-photo-wrapper {
+                margin: 0 auto 20px;
+            }
+            
+            .member-socials {
+                justify-content: center;
             }
         }
         
