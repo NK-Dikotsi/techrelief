@@ -62,6 +62,7 @@
             font-size: 14px;
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
+            color: #000000; /* Ensure button text is black */
         }
         
         .menu-btn:hover {
@@ -91,18 +92,30 @@
         
         .nav-link {
             text-decoration: none;
-            color: #000000;
+            color: #000000 !important; /* Force black color with !important */
             font-weight: 500;
             font-size: 16px;
             transition: all 0.3s ease;
             padding: 12px 18px;
             border-radius: 6px;
             display: block;
+            -webkit-tap-highlight-color: transparent; /* Remove iOS tap highlight */
+        }
+        
+        /* Specific fix for iOS Safari link colors */
+        .nav-link,
+        .nav-link:link,
+        .nav-link:visited,
+        .nav-link:hover,
+        .nav-link:active,
+        .nav-link:focus {
+            color: #000000 !important;
+            -webkit-text-fill-color: #000000 !important; /* Safari specific */
         }
         
         .nav-link:hover {
             background-color: #f3c46e;
-            color: #000;
+            color: #000 !important;
             transform: translateX(5px);
         }
         
