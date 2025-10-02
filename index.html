@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Relief | Project Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .menu-btn:hover {
+            background-color: #f3c46e;
+            border-color: #f3c46e;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            top: 110px;
+            right: 40px;
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+        }
+        
+        .nav-menu.active {
+            display: flex;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 12px 18px;
+            border-radius: 6px;
+            display: block;
+        }
+        
+        .nav-link:hover {
+            background-color: #f3c46e;
+            color: #000;
+            transform: translateX(5px);
+        }
+        
+        /* Timeline Styles */
+        .timeline-container {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e0e0e0;
+            z-index: -1;
+            transition: background-color 0.3s ease;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 45px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .timeline-number {
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            z-index: 1;
+            color: #999;
+        }
+        
+        .timeline-item.active .timeline-number {
+            color: #000;
+        }
+        
+        /* White color for timeline when on introduction */
+        body.on-introduction .timeline-number {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        body.on-introduction .timeline-item.active .timeline-number {
+            color: #ffffff;
+        }
+        
+        body.on-introduction .timeline-title {
+            color: #ffffff;
+        }
+        
+        body.on-introduction .timeline-line {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        body.on-introduction .timeline-dot {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        body.on-introduction .timeline-item.active .timeline-dot {
+            background-color: #f3c46e;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 38px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .timeline-item.active .timeline-dot {
+            background-color: #f3c46e;
+            transform: scale(1.5);
+            box-shadow: 0 0 0 4px rgba(243, 196, 110, 0.2);
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            font-size: 16px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: absolute;
+            left: 60px;
+        }
+        
+        .timeline-item.active .timeline-title {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            height: 100vh;
+            padding: 150px 80px 80px 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .section-content {
+            max-width: 800px;
+        }
+        
+        .section-content.with-mockup {
+            max-width: none;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+        
+        .solution-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .mockup-container {
+            flex: 0 0 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mockup-img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            animation: hoverFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes hoverFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .app-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #f3c46e;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .section p {
+            font-size: 1.3rem;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        /* Video Container Styles */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Video Text Overlay */
+        .video-text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .video-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-align: left;
+            line-height: 1.2;
+            max-width: 80%;
+            opacity: 0;
+            transform: translateY(50px);
+            position: absolute;
+        }
+        
+        .video-text.animate-in {
+            animation: textAscend 1s ease-out forwards;
+        }
+        
+        .video-text.animate-out {
+            animation: textFadeOut 0.5s ease-out forwards;
+        }
+        
+        .video-text.scroll-bounce {
+            animation: scrollBounce 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes textAscend {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes textFadeOut {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+        
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(20px);
+                opacity: 0.8;
+            }
+        }
+        
+        /* Play button overlay for mobile */
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-color: rgba(243, 196, 110, 0.9);
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .video-play-overlay:hover {
+            background-color: rgba(243, 196, 110, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .video-play-overlay::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid #000;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+        
+        .video-play-overlay.hidden {
+            display: none;
+        }
+        
+        /* Orange fullstop for section titles */
+        .section h1::after {
+            content: '.';
+            color: #f3c46e;
+        }
+        
+        /* Technology Carousel Styles */
+        .tech-carousel-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 50px;
+        }
+        
+        .tech-carousel {
+            display: flex;
+            gap: 60px;
+            animation: slideCarousel 30s linear infinite;
+            width: fit-content;
+        }
+        
+        .tech-carousel:hover {
+            animation-play-state: paused;
+        }
+        
+        .tech-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            flex-shrink: 0;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @keyframes slideCarousel {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Team Section Styles */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            margin-top: 50px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .team-member {
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-photo-wrapper {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .team-member:hover .member-photo-wrapper {
+            border-color: #f3c46e;
+            box-shadow: 0 10px 30px rgba(243, 196, 110, 0.4);
+        }
+        
+        .member-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+        
+        .team-member:hover .member-photo {
+            transform: scale(1.1);
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .member-name {
+            color: #f3c46e;
+        }
+        
+        .member-socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            color: #000;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background-color: #f3c46e;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(243, 196, 110, 0.4);
+        }
+        
+        #introduction {
+            background-color: #000000;
+            position: relative;
+            padding: 0;
+        }
+        
+        #problem {
+            background-color: #ffffff;
+        }
+        
+        #solution {
+            background-color: #ffffff;
+        }
+        
+        #technologies {
+            background-color: #ffffff;
+        }
+        
+        #team {
+            background-color: #ffffff;
+        }
+        
+        /* Footer - Blended with page */
+        .footer {
+            background-color: transparent;
+            padding: 40px;
+            text-align: center;
+            color: black;
+            font-size: 14px;
+        }
+        
+        /* Responsive styles */
+        @media screen and (max-width: 1024px) {
+            .timeline-container {
+                left: 20px;
+            }
+            
+            .section {
+                padding: 150px 60px 80px 200px;
+            }
+            
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-dot {
+                left: 28px;
+            }
+            
+            .timeline-number {
+                margin-right: 12px;
+                font-size: 14px;
+            }
+            
+            .timeline-title {
+                left: 50px;
+                font-size: 14px;
+            }
+            
+            .timeline-item {
+                margin-bottom: 40px;
+            }
+            
+            .video-text {
+                font-size: 3rem;
+                max-width: 85%;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .menu-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .nav-menu {
+                right: 20px;
+                top: 90px;
+                padding: 20px;
+                min-width: 180px;
+            }
+            
+            .timeline-container {
+                display: none;
+            }
+            
+            .section {
+                padding: 100px 20px 40px 20px;
+                min-height: 100vh;
+                height: 100vh;
+            }
+            
+            .section h1 {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+            }
+            
+            .section p {
+                font-size: 1rem;
+            }
+            
+            .section-content.with-mockup {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .solution-text {
+                text-align: left;
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .tech-carousel-wrapper {
+                width: calc(100vw - 40px);
+                max-width: calc(100vw - 40px);
+                margin-left: -20px;
+                margin-right: -20px;
+                padding: 0 20px;
+            }
+            
+            .mockup-container {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .app-title {
+                font-size: 2.8rem;
+            }
+            
+            .video-text {
+                font-size: 2rem;
+                max-width: 90%;
+            }
+            
+            .tech-logo {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .member-photo-wrapper {
+                width: 180px;
+                height: 180px;
+            }
+            
+            #team {
+                height: auto;
+                min-height: 100vh;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .logo-img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .section {
+                padding: 90px 15px 30px 15px;
+            }
+            
+            .section h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .section p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            
+            .section-content.with-mockup {
+                gap: 25px;
+            }
+            
+            .mockup-container {
+                max-width: 300px;
+            }
+            
+            .app-title {
+                font-size: 2.2rem;
+            }
+            
+            .tech-logo {
+                width: 80px;
+                height: 80px;
+                filter: grayscale(0%);
+                opacity: 1;
+            }
+            
+            .tech-carousel {
+                gap: 40px;
+            }
+            
+            .tech-carousel-wrapper {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .video-text {
+                font-size: 1.5rem;
+                max-width: 90%;
+            }
+            
+            .member-photo-wrapper {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .member-name {
+                font-size: 1.1rem;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Tech Relief Logo" class="logo-img">
+        </div>
+        
+        <button class="menu-btn">MENU</button>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#introduction" class="nav-link">Introduction</a>
+            </li>
+            <li class="nav-item">
+                <a href="#problem" class="nav-link">Problem</a>
+            </li>
+            <li class="nav-item">
+                <a href="#solution" class="nav-link">Solution</a>
+            </li>
+            <li class="nav-item">
+                <a href="#technologies" class="nav-link">Technologies</a>
+            </li>
+            <li class="nav-item">
+                <a href="#team" class="nav-link">Team</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Timeline -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-item active" data-section="introduction">
+            <div class="timeline-number">01</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Introduction</div>
+        </div>
+        <div class="timeline-item" data-section="problem">
+            <div class="timeline-number">02</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Problem</div>
+        </div>
+        <div class="timeline-item" data-section="solution">
+            <div class="timeline-number">03</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Solution</div>
+        </div>
+        <div class="timeline-item" data-section="technologies">
+            <div class="timeline-number">04</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Technologies</div>
+        </div>
+        <div class="timeline-item" data-section="team">
+            <div class="timeline-number">05</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Team</div>
+        </div>
+    </div>
+
+    <!-- Sections -->
+    <section id="introduction" class="section">
+        <div class="video-container">
+            <video class="intro-video" autoplay muted loop playsinline preload="auto" poster="">
+                <source src="vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-text-overlay" id="textOverlay"></div>
+            <div class="video-play-overlay" id="playOverlay"></div>
+        </div>
+    </section>
+    
+    <section id="problem" class="section">
+        <div class="section-content with-mockup">
+            <div class="solution-text">
+                <h1>Problem</h1>
+                <p>Critical <span style="color: #f3c46e; font-weight: 600;">emergency reports</span> face significant <span style="color: #f3c46e; font-weight: 600;">delays and inefficiencies</span> due to <span style="color: #f3c46e; font-weight: 600;">fragmented communication channels</span> where urgent requests compete with non-essential content, causing <span style="color: #f3c46e; font-weight: 600;">vital information to be overlooked</span>. This is compounded by <span style="color: #f3c46e; font-weight: 600;">inadequate location identification</span> that hinders accurate <span style="color: #f3c46e; font-weight: 600;">emergency response coordination</span>. Furthermore, despite strong <span style="color: #f3c46e; font-weight: 600;">community willingness to assist</span>, the absence of a <span style="color: #f3c46e; font-weight: 600;">unified platform</span> prevents the effective organization and direction of available support, leaving both those in need and potential helpers <span style="color: #f3c46e; font-weight: 600;">disconnected during crucial moments</span>.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="solution" class="section">
+        <div class="section-content with-mockup">
+            <div class="solution-text">
+                <h1>Solution</h1>
+                <div class="app-title">SIZA</div>
+                <p><span style="color: #f3c46e; font-weight: 600;">SIZA</span> addresses critical <span style="color: #f3c46e; font-weight: 600;">emergency response gaps</span> through a <span style="color: #f3c46e; font-weight: 600;">unified platform</span> that coordinates community assistance with precision and speed. The solution enables <span style="color: #f3c46e; font-weight: 600;">immediate emergency reporting</span> with <span style="color: #f3c46e; font-weight: 600;">automated location capture</span>, eliminating descriptive delays and inaccuracies. It organizes <span style="color: #f3c46e; font-weight: 600;">community response efforts</span> through dedicated communication channels, ensuring urgent requests receive <span style="color: #f3c46e; font-weight: 600;">prioritized attention</span> without competing with non-essential content. The platform facilitates <span style="color: #f3c46e; font-weight: 600;">coordinated assistance</span> by connecting those in need with <span style="color: #f3c46e; font-weight: 600;">verified community responders</span> in real-time, transforming scattered goodwill into <span style="color: #f3c46e; font-weight: 600;">structured, effective support</span> when seconds matter most.</p>
+            </div>
+            <div class="mockup-container">
+                <img src="GIF.gif" alt="SIZA App Mockup" class="mockup-img">
+            </div>
+        </div>
+    </section>
+    
+    <section id="technologies" class="section">
+        <div class="section-content with-mockup">
+            <div class="solution-text">
+                <h1>Technologies</h1>
+                <p>We're utilizing <span style="color: #f3c46e; font-weight: 600;">modern web technologies</span> to build a <span style="color: #f3c46e; font-weight: 600;">scalable</span> and <span style="color: #f3c46e; font-weight: 600;">efficient platform</span>. Our <span style="color: #f3c46e; font-weight: 600;">tech stack</span> ensures <span style="color: #f3c46e; font-weight: 600;">reliability</span>, <span style="color: #f3c46e; font-weight: 600;">performance</span>, and <span style="color: #f3c46e; font-weight: 600;">accessibility</span> across all devices.</p>
+            
+                <div class="tech-carousel-wrapper" id="carouselWrapper">
+                    <div class="tech-carousel" id="techCarousel">
+                        <!-- First set of logos -->
+                        <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
+                        <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
+                        <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
+                        <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
+                        <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
+                        <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
+                        <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
+                        <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
+                        <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
+                        <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
+                        <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
+                        
+                        <!-- Duplicate set for seamless loop -->
+                        <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
+                        <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
+                        <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
+                        <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
+                        <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
+                        <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
+                        <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
+                        <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
+                        <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
+                        <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
+                        <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="section">
+        <div class="section-content">
+            <h1>Team</h1>
+            <p>We are <span style="color: #f3c46e; font-weight: 600;">Tech Relief</span>, four aspiring <span style="color: #f3c46e; font-weight: 600;">software engineers</span> dedicated to creating innovative solutions that make a real difference in our communities.</p>
+            
+            <div class="team-grid">
+                <!-- Karabo Mosaine -->
+                <div class="team-member">
+                    <div class="member-photo-wrapper">
+                        <img src="karabo.jpeg" alt="Karabo Mosaine" class="member-photo">
+                    </div>
+                    <div class="member-name">Karabo Mosaine</div>
+                    <div class="member-socials">
+                        <a href="https://www.linkedin.com/in/karabo-mosiane-a1b20834a/" class="social-icon" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="mosiane.karii@gmail.com" class="social-icon" title="Email">
+                            <i class="bi bi-envelope-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Nkateko Mabunda -->
+                <div class="team-member">
+                    <div class="member-photo-wrapper">
+                        <img src="nkt.jpeg" alt="Nkateko Mabunda" class="member-photo">
+                    </div>
+                    <div class="member-name">Nkateko Mabunda</div>
+                    <div class="member-socials">
+                        <a href="https://www.linkedin.com/in/nkateko-mabunda-6b0ba32b3/" class="social-icon" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="nktmabunda2@gmail.com" class="social-icon" title="Email">
+                            <i class="bi bi-envelope-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Kutlwano Dikotsi -->
+                <div class="team-member">
+                    <div class="member-photo-wrapper">
+                        <img src="wano.jpeg" alt="Kutlwano Dikotsi" class="member-photo">
+                    </div>
+                    <div class="member-name">Kutlwano Dikotsi</div>
+                    <div class="member-socials">
+                        <a href="kedin.com/in/ntsane-kutlwano-dikotsi-b503b8282/" class="social-icon" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="mdikotsi12@gmail.com" class="social-icon" title="Email">
+                            <i class="bi bi-envelope-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Lethabo Mojakgomo -->
+                <div class="team-member">
+                    <div class="member-photo-wrapper">
+                        <img src="Moja.jpeg" alt="Lethabo Mojakgomo" class="member-photo">
+                    </div>
+                    <div class="member-name">Lethabo Mojakgomo</div>
+                    <div class="member-socials">
+                        <a href="https://www.linkedin.com/in/lethabo-mojakgomo-50b451231/" class="social-icon" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="mojaleeboy19@gmail.com" class="social-icon" title="Email">
+                            <i class="bi bi-envelope-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Tech Relief. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Text animation script
+        const textSequence = [
+            { text: "IN OUR COMMUNITIES", duration: 1200 },
+            { text: "EVERY DAY BRINGS NEW EMERGENCIES", duration: 1200 },
+            { text: "FIRES", duration: 1375 },
+            { text: "FLOODS", duration: 1375 },
+            { text: "ACCIDENTS", duration: 1375 },
+            { text: "GENDER-BASED VIOLENCE", duration: 1375 },
+            { text: "MEDICAL CRISES", duration: 1375 },
+            { text: "NEIGHBOURS STEP UP TO HELP", duration: 1375 },
+            { text: "BUT TIMELY HELP DOESN'T ALWAYS", duration: 1375 },
+            { text: "REACH THOSE IN NEED", duration: 1375 },
+            { text: "SCROLL DOWN", duration: null, bounce: true }
+        ];
+
+        let currentTextIndex = 0;
+        let animationTimeout;
+        const textOverlay = document.getElementById('textOverlay');
+
+        function showNextText() {
+            textOverlay.innerHTML = '';
+            
+            if (currentTextIndex >= textSequence.length) {
+                currentTextIndex = 0;
+            }
+
+            const currentItem = textSequence[currentTextIndex];
+            
+            const textElement = document.createElement('div');
+            textElement.className = 'video-text animate-in';
+            
+            if (currentItem.bounce) {
+                textElement.classList.add('scroll-bounce');
+            }
+            
+            textElement.textContent = currentItem.text;
+            textOverlay.appendChild(textElement);
+
+            currentTextIndex++;
+
+            if (currentItem.duration) {
+                animationTimeout = setTimeout(() => {
+                    textElement.classList.remove('animate-in');
+                    textElement.classList.add('animate-out');
+                    
+                    setTimeout(() => {
+                        showNextText();
+                    }, 500);
+                }, currentItem.duration);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.intro-video');
+            const playOverlay = document.getElementById('playOverlay');
+            let hasPlayed = false;
+            let textAnimationStarted = false;
+            
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('webkit-playsinline', '');
+            video.setAttribute('x5-playsinline', '');
+            
+            function attemptPlay() {
+                if (hasPlayed) return;
+                
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('Video playing automatically');
+                        hasPlayed = true;
+                        playOverlay.style.display = 'none';
+                        
+                        if (!textAnimationStarted) {
+                            textAnimationStarted = true;
+                            showNextText();
+                        }
+                    }).catch(error => {
+                        console.log('Autoplay prevented:', error);
+                        playOverlay.style.display = 'flex';
+                    });
+                }
+            }
+            
+            attemptPlay();
+            
+            playOverlay.addEventListener('click', function() {
+                video.play().then(() => {
+                    hasPlayed = true;
+                    playOverlay.style.display = 'none';
+                    
+                    if (!textAnimationStarted) {
+                        textAnimationStarted = true;
+                        showNextText();
+                    }
+                }).catch(error => {
+                    console.error('Failed to play video:', error);
+                });
+            });
+            
+            const events = ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'];
+            const playOnInteraction = () => {
+                if (!hasPlayed) {
+                    attemptPlay();
+                }
+            };
+            
+            events.forEach(event => {
+                document.addEventListener(event, playOnInteraction, { once: true });
+            });
+            
+            video.addEventListener('loadedmetadata', function() {
+                console.log('Video metadata loaded');
+                attemptPlay();
+            });
+            
+            video.addEventListener('loadeddata', function() {
+                console.log('Video data loaded');
+                attemptPlay();
+            });
+            
+            video.addEventListener('playing', function() {
+                console.log('Video is playing');
+                hasPlayed = true;
+                playOverlay.style.display = 'none';
+                
+                if (!textAnimationStarted) {
+                    textAnimationStarted = true;
+                    showNextText();
+                }
+            });
+            
+            video.addEventListener('error', function(e) {
+                console.error('Video error:', e);
+                console.error('Error details:', video.error);
+                playOverlay.style.display = 'none';
+            });
+            
+            video.addEventListener('ended', function() {
+                currentTextIndex = 0;
+                clearTimeout(animationTimeout);
+                textOverlay.innerHTML = '';
+                showNextText();
+            });
+            
+            video.addEventListener('timeupdate', function() {
+                if (video.currentTime < 0.5 && currentTextIndex >= textSequence.length - 1) {
+                    currentTextIndex = 0;
+                    clearTimeout(animationTimeout);
+                    textOverlay.innerHTML = '';
+                    showNextText();
+                }
+            });
+            
+            video.load();
+        });
+        
+        const menuBtn = document.querySelector('.menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuBtn.textContent = navMenu.classList.contains('active') ? 'CLOSE' : 'MENU';
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBtn.textContent = 'MENU';
+        }));
+        
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                navMenu.classList.remove('active');
+                menuBtn.textContent = 'MENU';
+            }
+        });
+        
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const sections = document.querySelectorAll('.section');
+        
+        function updateActiveTimelineItem() {
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
+            const introSection = document.getElementById('introduction');
+            const introTop = introSection.offsetTop;
+            const introBottom = introTop + introSection.offsetHeight;
+            
+            if (scrollPosition >= introTop && scrollPosition < introBottom) {
+                document.body.classList.add('on-introduction');
+            } else {
+                document.body.classList.remove('on-introduction');
+            }
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    timelineItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    timelineItems[index].classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveTimelineItem);
+        
+        timelineItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.getAttribute('data-section');
+                const targetSection = document.getElementById(sectionId);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        updateActiveTimelineItem();
+        
+        const carouselWrapper = document.getElementById('carouselWrapper');
+        const carousel = document.getElementById('techCarousel');
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDown = false;
+
+        if (carouselWrapper && carousel) {
+            carouselWrapper.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX;
+                carousel.style.animationPlayState = 'paused';
+            });
+
+            carouselWrapper.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.touches[0].pageX;
+                const walk = (startX - x) * 2;
+                const currentTransform = carousel.style.transform;
+                const currentX = currentTransform ? parseFloat(currentTransform.match(/-?\d+\.?\d*/)) : 0;
+                carousel.style.transform = `translateX(${currentX - walk}px)`;
+                startX = x;
+            });
+
+            carouselWrapper.addEventListener('touchend', () => {
+                isDown = false;
+                setTimeout(() => {
+                    carousel.style.animationPlayState = 'running';
+                }, 1000);
+            });
+
+            carouselWrapper.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX;
+                carousel.style.animationPlayState = 'paused';
+                carouselWrapper.style.cursor = 'grabbing';
+            });
+
+            carouselWrapper.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX;
+                const walk = (startX - x) * 2;
+                const currentTransform = carousel.style.transform;
+                const currentX = currentTransform ? parseFloat(currentTransform.match(/-?\d+\.?\d*/)) : 0;
+                carousel.style.transform = `translateX(${currentX - walk}px)`;
+                startX = x;
+            });
+
+            carouselWrapper.addEventListener('mouseup', () => {
+                isDown = false;
+                carouselWrapper.style.cursor = 'grab';
+                setTimeout(() => {
+                    carousel.style.animationPlayState = 'running';
+                }, 1000);
+            });
+
+            carouselWrapper.addEventListener('mouseleave', () => {
+                if (isDown) {
+                    isDown = false;
+                    carouselWrapper.style.cursor = 'grab';
+                    setTimeout(() => {
+                        carousel.style.animationPlayState = 'running';
+                    }, 1000);
+                }
+            });
+
+            carouselWrapper.style.cursor = 'grab';
+        }
+    </script>
+</body>
+</html>
