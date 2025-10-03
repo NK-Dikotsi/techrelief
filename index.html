@@ -62,7 +62,7 @@
             font-size: 14px;
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
-            color: #000000; /* Ensure button text is black */
+            color: #000000;
         }
         
         .menu-btn:hover {
@@ -92,25 +92,14 @@
         
         .nav-link {
             text-decoration: none;
-            color: #000000 !important; /* Force black color with !important */
+            color: #000000 !important;
             font-weight: 500;
             font-size: 16px;
             transition: all 0.3s ease;
             padding: 12px 18px;
             border-radius: 6px;
             display: block;
-            -webkit-tap-highlight-color: transparent; /* Remove iOS tap highlight */
-        }
-        
-        /* Specific fix for iOS Safari link colors */
-        .nav-link,
-        .nav-link:link,
-        .nav-link:visited,
-        .nav-link:hover,
-        .nav-link:active,
-        .nav-link:focus {
-            color: #000000 !important;
-            -webkit-text-fill-color: #000000 !important; /* Safari specific */
+            -webkit-tap-highlight-color: transparent;
         }
         
         .nav-link:hover {
@@ -164,7 +153,6 @@
             color: #000;
         }
         
-        /* White color for timeline when on introduction */
         body.on-introduction .timeline-number {
             color: rgba(255, 255, 255, 0.5);
         }
@@ -569,89 +557,143 @@
         }
         
         /* Team Section Styles */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 50px;
-            margin-top: 50px;
+        .team-container {
             width: 100%;
             max-width: 1200px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .team-member {
-            text-align: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
+        .team-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
         }
         
-        .team-member:hover {
-            transform: translateY(-10px);
+        .team-member-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            padding: 20px 0;
+        }
+        
+        .member-content {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .member-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #000;
+        }
+        
+        .member-bio {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.7;
         }
         
         .member-photo-wrapper {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 20px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             overflow: hidden;
-            border: 4px solid transparent;
-            transition: all 0.4s ease;
+            border: 4px solid #f3c46e;
+            box-shadow: 0 10px 30px rgba(243, 196, 110, 0.3);
+            flex-shrink: 0;
             position: relative;
-        }
-        
-        .team-member:hover .member-photo-wrapper {
-            border-color: #f3c46e;
-            box-shadow: 0 10px 30px rgba(243, 196, 110, 0.4);
         }
         
         .member-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.4s ease;
         }
         
-        .team-member:hover .member-photo {
-            transform: scale(1.1);
-        }
-        
-        .member-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #000;
-            transition: all 0.3s ease;
-        }
-        
-        .team-member:hover .member-name {
-            color: #f3c46e;
-        }
-        
-        .member-socials {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
+        /* Next button BELOW the photo for desktop */
+        .photo-next-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background-color: #f0f0f0;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #f3c46e;
             color: #000;
-            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
+            width: 180px;
+            align-self: center;
         }
         
-        .social-icon:hover {
-            background-color: #f3c46e;
-            color: #fff;
-            transform: translateY(-3px);
+        .photo-next-btn:hover {
+            background-color: #e6b85c;
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(243, 196, 110, 0.4);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background-color: #f3c46e;
+            transform: scale(1.2);
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(243, 196, 110, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            color: #000;
+        }
+        
+        .carousel-arrow:hover {
+            background-color: #f3c46e;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-arrow.prev {
+            left: -70px;
+        }
+        
+        .carousel-arrow.next {
+            right: -70px;
         }
         
         #introduction {
@@ -668,15 +710,15 @@
             background-color: #ffffff;
         }
         
+        #team {
+            background-color: #ffffff;
+        }
+        
         #technologies {
             background-color: #ffffff;
         }
         
         #demo {
-            background-color: #ffffff;
-        }
-        
-        #team {
             background-color: #ffffff;
         }
         
@@ -691,29 +733,7 @@
         
         /* New styles for left-aligned sections */
         #technologies .section-content,
-        #demo .section-content {
-            max-width: none;
-            width: 100%;
-            align-items: flex-start;
-            text-align: left;
-        }
-        
-        #technologies .section-content h1,
-        #demo .section-content h1 {
-            text-align: left;
-            width: 100%;
-        }
-        
-        #technologies .section-content p,
-        #demo .section-content p {
-            text-align: left;
-            width: 100%;
-            max-width: 100%;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        /* New styles for left-aligned team section */
+        #demo .section-content,
         #team .section-content {
             max-width: none;
             width: 100%;
@@ -721,30 +741,21 @@
             text-align: left;
         }
         
+        #technologies .section-content h1,
+        #demo .section-content h1,
         #team .section-content h1 {
             text-align: left;
             width: 100%;
         }
         
+        #technologies .section-content p,
+        #demo .section-content p,
         #team .section-content p {
             text-align: left;
             width: 100%;
             max-width: 100%;
             word-wrap: break-word;
             overflow-wrap: break-word;
-        }
-        
-        /* Center team member images */
-        .team-member {
-            text-align: center;
-        }
-        
-        .member-photo-wrapper {
-            margin: 0 auto 20px;
-        }
-        
-        .member-socials {
-            justify-content: center;
         }
         
         /* Responsive styles */
@@ -784,9 +795,13 @@
                 max-width: 85%;
             }
             
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .team-member-slide {
                 gap: 40px;
+            }
+            
+            .member-photo-wrapper {
+                width: 240px;
+                height: 240px;
             }
         }
         
@@ -898,15 +913,55 @@
                 padding: 6px 12px;
             }
             
-            .team-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .team-container {
                 margin-top: 30px;
             }
             
+            .team-member-slide {
+                flex-direction: column-reverse;
+                gap: 30px;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .member-content {
+                text-align: center;
+            }
+            
+            .member-name {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .member-bio {
+                font-size: 1rem;
+            }
+            
             .member-photo-wrapper {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
+            }
+            
+            .photo-next-btn {
+                display: none; /* Hide photo next button on mobile */
+            }
+            
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .carousel-arrow.prev {
+                left: 10px;
+            }
+            
+            .carousel-arrow.next {
+                right: 10px;
+            }
+            
+            .carousel-nav {
+                bottom: -40px;
             }
             
             #team {
@@ -932,19 +987,6 @@
             #demo .section-content p,
             #team .section-content p {
                 text-align: left;
-            }
-            
-            /* Center team member images on mobile */
-            .team-member {
-                text-align: center;
-            }
-            
-            .member-photo-wrapper {
-                margin: 0 auto 20px;
-            }
-            
-            .member-socials {
-                justify-content: center;
             }
         }
         
@@ -1031,23 +1073,22 @@
             }
             
             .member-photo-wrapper {
-                width: 160px;
-                height: 160px;
+                width: 180px;
+                height: 180px;
             }
             
             .member-name {
-                font-size: 1.1rem;
+                font-size: 1.5rem;
             }
             
-            .social-icon {
+            .member-bio {
+                font-size: 0.9rem;
+            }
+            
+            .carousel-arrow {
                 width: 35px;
                 height: 35px;
-                font-size: 16px;
-            }
-            
-            .team-grid {
-                gap: 25px;
-                margin-top: 25px;
+                font-size: 1rem;
             }
         }
         
@@ -1070,13 +1111,9 @@
                 font-size: 2rem;
             }
             
-            .team-grid {
-                gap: 20px;
-            }
-            
             .member-photo-wrapper {
-                width: 140px;
-                height: 140px;
+                width: 160px;
+                height: 160px;
             }
         }
     </style>
@@ -1101,13 +1138,13 @@
                 <a href="#solution" class="nav-link">Solution</a>
             </li>
             <li class="nav-item">
+                <a href="#team" class="nav-link">Team</a>
+            </li>
+            <li class="nav-item">
                 <a href="#technologies" class="nav-link">Technologies</a>
             </li>
             <li class="nav-item">
                 <a href="#demo" class="nav-link">Demo</a>
-            </li>
-            <li class="nav-item">
-                <a href="#team" class="nav-link">Team</a>
             </li>
         </ul>
     </nav>
@@ -1130,20 +1167,20 @@
             <div class="timeline-dot"></div>
             <div class="timeline-title">Solution</div>
         </div>
-        <div class="timeline-item" data-section="technologies">
+        <div class="timeline-item" data-section="team">
             <div class="timeline-number">04</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Team</div>
+        </div>
+        <div class="timeline-item" data-section="technologies">
+            <div class="timeline-number">05</div>
             <div class="timeline-dot"></div>
             <div class="timeline-title">Technologies</div>
         </div>
         <div class="timeline-item" data-section="demo">
-            <div class="timeline-number">05</div>
-            <div class="timeline-dot"></div>
-            <div class="timeline-title">Demo</div>
-        </div>
-        <div class="timeline-item" data-section="team">
             <div class="timeline-number">06</div>
             <div class="timeline-dot"></div>
-            <div class="timeline-title">Team</div>
+            <div class="timeline-title">Demo</div>
         </div>
     </div>
 
@@ -1177,6 +1214,96 @@
             </div>
             <div class="mockup-container">
                 <img src="GIF.gif" alt="SIZA App Mockup" class="mockup-img">
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="section">
+        <div class="section-content">
+            <h1>Team</h1>
+            <p>We are <span style="color: #f3c46e; font-weight: 600;">Tech Relief</span>, four aspiring <span style="color: #f3c46e; font-weight: 600;">software engineers</span> dedicated to creating innovative solutions that make a real difference in our communities.</p>
+            
+            <div class="team-container">
+                <div class="team-carousel" id="teamCarousel">
+                    <!-- Kutlwano Dikotsi -->
+                    <div class="team-member-slide">
+                        <div class="member-content">
+                            <div class="member-name">Kutlwano Dikotsi</div>
+                            <p class="member-bio">As an aspiring <span style="color: #f3c46e; font-weight: 600;">Software Engineer</span>, I have a solid background in <span style="color: #f3c46e; font-weight: 600;">full-stack development</span>. I've built <span style="color: #f3c46e; font-weight: 600;">scalable applications</span> using <span style="color: #f3c46e; font-weight: 600;">.NET, Java, C#, and Python</span> for the backend. For the frontend, I use <span style="color: #f3c46e; font-weight: 600;">JavaScript, React, and TypeScript</span>. I have experience with <span style="color: #f3c46e; font-weight: 600;">SQL in Azure and MySQL</span>, integrated <span style="color: #f3c46e; font-weight: 600;">APIs</span>, and created <span style="color: #f3c46e; font-weight: 600;">cross-platform solutions</span> with <span style="color: #f3c46e; font-weight: 600;">Unity and Firebase</span>. I am passionate about using <span style="color: #f3c46e; font-weight: 600;">technology</span> to create <span style="color: #f3c46e; font-weight: 600;">efficient, user-focused systems</span> that address real problems and have a <span style="color: #f3c46e; font-weight: 600;">meaningful impact</span>. A fun fact about my coding approach is that I often compare <span style="color: #f3c46e; font-weight: 600;">debugging</span> to solving a puzzle. The joy comes from tracing the logic until every piece fits together perfectly.</p>
+                        </div>
+                        <div class="member-photo-container">
+                            <div class="member-photo-wrapper">
+                                <img src="wano.jpeg" alt="Kutlwano Dikotsi" class="member-photo">
+                            </div>
+                            <button class="photo-next-btn" data-next="1">
+                                 Next Member <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Nkateko Mabunda -->
+                    <div class="team-member-slide">
+                        <div class="member-content">
+                            <div class="member-name">Nkateko Mabunda</div>
+                            <p class="member-bio">As a dedicated <span style="color: #f3c46e; font-weight: 600;">BSc in IT student</span>, my passion extends beyond theory into <span style="color: #f3c46e; font-weight: 600;">practical, hands-on development</span>. My <span style="color: #f3c46e; font-weight: 600;">versatile skill set</span>, honed through coursework and personal projects, includes <span style="color: #f3c46e; font-weight: 600;">C++, Java, and Visual Basic</span>, complemented by <span style="color: #f3c46e; font-weight: 600;">full-stack proficiency</span> with <span style="color: #f3c46e; font-weight: 600;">JavaScript, HTML, ASP.NET, WCF services, and Express.js</span>. This <span style="color: #f3c46e; font-weight: 600;">well-rounded expertise</span>, even extending to <span style="color: #f3c46e; font-weight: 600;">Assembly</span>, makes me a <span style="color: #f3c46e; font-weight: 600;">versatile problem-solver</span>. I am eager to apply this blend of <span style="color: #f3c46e; font-weight: 600;">critical thinking</span> and <span style="color: #f3c46e; font-weight: 600;">technical innovation</span> to create solutions that effectively bridge <span style="color: #f3c46e; font-weight: 600;">technology</span> with <span style="color: #f3c46e; font-weight: 600;">real-world needs</span>.</p>
+                        </div>
+                        <div class="member-photo-container">
+                            <div class="member-photo-wrapper">
+                                <img src="nkt.jpeg" alt="Nkateko Mabunda" class="member-photo">
+                            </div>
+                            <button class="photo-next-btn" data-next="2">
+                                Next Member <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Karabo Mosaine -->
+                    <div class="team-member-slide">
+                        <div class="member-content">
+                            <div class="member-name">Karabo Mosaine</div>
+                            <p class="member-bio">I am Karabo Mosiane, an aspiring <span style="color: #f3c46e; font-weight: 600;">software developer</span> and <span style="color: #f3c46e; font-weight: 600;">BSc Information Technology</span> graduate with a strong passion for <span style="color: #f3c46e; font-weight: 600;">mobile and web development</span>. Proficient in <span style="color: #f3c46e; font-weight: 600;">Java, JavaScript, C++, C#, and SQL</span>, I have hands-on experience with frameworks such as <span style="color: #f3c46e; font-weight: 600;">ASP.NET, React, and Expo</span>. I enjoy designing and building <span style="color: #f3c46e; font-weight: 600;">innovative, user-friendly solutions</span> that solve <span style="color: #f3c46e; font-weight: 600;">real-world problems</span>, with a particular focus on <span style="color: #f3c46e; font-weight: 600;">cross-platform mobile applications</span> and <span style="color: #f3c46e; font-weight: 600;">full-stack development</span>. Through academic studies and project work, I have developed strong skills in <span style="color: #f3c46e; font-weight: 600;">database management, software engineering, and scalable system design</span>.</p>
+                        </div>
+                        <div class="member-photo-container">
+                            <div class="member-photo-wrapper">
+                                <img src="karabo.jpeg" alt="Karabo Mosaine" class="member-photo">
+                            </div>
+                            <button class="photo-next-btn" data-next="3">
+                                Next Member <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Lethabo Mojakgomo -->
+                    <div class="team-member-slide">
+                        <div class="member-content">
+                            <div class="member-name">Lethabo Mojakgomo</div>
+                            <p class="member-bio">A motivated final-year <span style="color: #f3c46e; font-weight: 600;">Computer Science and Informatics</span> student with advanced proficiency in modern web technologies including <span style="color: #f3c46e; font-weight: 600;">JavaScript, C#, C++, Next.js, React, and SQL</span>. Practical experience includes developing a <span style="color: #f3c46e; font-weight: 600;">full-stack Emergency Responder System</span> that demonstrates strong <span style="color: #f3c46e; font-weight: 600;">problem-solving capabilities</span> and comprehensive <span style="color: #f3c46e; font-weight: 600;">full-stack development skills</span>. Experience as a <span style="color: #f3c46e; font-weight: 600;">Computer Science Assistant</span> has further developed <span style="color: #f3c46e; font-weight: 600;">communication and mentorship abilities</span> through supporting first-year students and contributing to course delivery. As a fluent <span style="color: #f3c46e; font-weight: 600;">English and Sepedi speaker</span> with a strong academic background, this candidate is now seeking to launch a professional career as a <span style="color: #f3c46e; font-weight: 600;">Junior Software Developer</span>, eager to contribute to innovative projects while continuing to grow as a <span style="color: #f3c46e; font-weight: 600;">software engineering professional</span>.</p>
+                        </div>
+                        <div class="member-photo-container">
+                            <div class="member-photo-wrapper">
+                                <img src="Moja.jpeg" alt="Lethabo Mojakgomo" class="member-photo">
+                            </div>
+                            <button class="photo-next-btn" data-next="0">
+                                Next Member <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <div class="carousel-arrow prev" id="prevArrow">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                <div class="carousel-arrow next" id="nextArrow">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+                
+                <div class="carousel-nav">
+                    <div class="carousel-dot active" data-index="0"></div>
+                    <div class="carousel-dot" data-index="1"></div>
+                    <div class="carousel-dot" data-index="2"></div>
+                    <div class="carousel-dot" data-index="3"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1253,10 +1380,11 @@
                 <div class="video-wrapper" id="demoVideoWrapper">
                     <!-- Embedded YouTube video -->
                     <iframe class="demo-video" 
-                            src="https://www.youtube.com/embed/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv&autoplay=0&mute=1&controls=1&rel=0&modestbranding=1" 
-                            title="SIZA Demo Video" 
+                            src="https://www.youtube.com/embed/kq6OLT-7DpI?si=Fo1gzg5YzqoQYPiu" 
+                            title="YouTube video player" 
                             frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
                             allowfullscreen>
                     </iframe>
                     
@@ -1266,82 +1394,9 @@
                     </div>
                     
                     <!-- YouTube redirect link -->
-                    <a href="https://youtu.be/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv" target="_blank" class="youtube-redirect">
+                    <a href="https://youtu.be/kq6OLT-7DpI" target="_blank" class="youtube-redirect">
                         Watch on YouTube
                     </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="team" class="section">
-        <div class="section-content">
-            <h1>Team</h1>
-            <p>We are <span style="color: #f3c46e; font-weight: 600;">Tech Relief</span>, four aspiring <span style="color: #f3c46e; font-weight: 600;">software engineers</span> dedicated to creating innovative solutions that make a real difference in our communities.</p>
-            
-            <div class="team-grid">
-                <!-- Karabo Mosaine -->
-                <div class="team-member">
-                    <div class="member-photo-wrapper">
-                        <img src="karabo.jpeg" alt="Karabo Mosaine" class="member-photo">
-                    </div>
-                    <div class="member-name">Karabo Mosaine</div>
-                    <div class="member-socials">
-                        <a href="https://www.linkedin.com/in/karabo-mosiane-a1b20834a/" class="social-icon" title="LinkedIn">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="mosiane.karii@gmail.com" class="social-icon" title="Email">
-                            <i class="bi bi-envelope-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Nkateko Mabunda -->
-                <div class="team-member">
-                    <div class="member-photo-wrapper">
-                        <img src="nkt.jpeg" alt="Nkateko Mabunda" class="member-photo">
-                    </div>
-                    <div class="member-name">Nkateko Mabunda</div>
-                    <div class="member-socials">
-                        <a href="https://www.linkedin.com/in/nkateko-mabunda-6b0ba32b3/" class="social-icon" title="LinkedIn">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="nktmabunda2@gmail.com" class="social-icon" title="Email">
-                            <i class="bi bi-envelope-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Kutlwano Dikotsi -->
-                <div class="team-member">
-                    <div class="member-photo-wrapper">
-                        <img src="wano.jpeg" alt="Kutlwano Dikotsi" class="member-photo">
-                    </div>
-                    <div class="member-name">Kutlwano Dikotsi</div>
-                    <div class="member-socials">
-                        <a href="https://www.linkedin.com/in/ntsane-kutlwano-dikotsi-b503b8282/" class="social-icon" title="LinkedIn">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="mdikotsi12@gmail.com" class="social-icon" title="Email">
-                            <i class="bi bi-envelope-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Lethabo Mojakgomo -->
-                <div class="team-member">
-                    <div class="member-photo-wrapper">
-                        <img src="Moja.jpeg" alt="Lethabo Mojakgomo" class="member-photo">
-                    </div>
-                    <div class="member-name">Lethabo Mojakgomo</div>
-                    <div class="member-socials">
-                        <a href="https://www.linkedin.com/in/lethabo-mojakgomo-50b451231/" class="social-icon" title="LinkedIn">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="mojaleeboy19@gmail.com" class="social-icon" title="Email">
-                            <i class="bi bi-envelope-fill"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1404,6 +1459,110 @@
                 }, currentItem.duration);
             }
         }
+
+        // Team Carousel Functionality
+        const teamCarousel = document.getElementById('teamCarousel');
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const photoNextBtns = document.querySelectorAll('.photo-next-btn');
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        function updateCarousel() {
+            teamCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 10000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Event listeners for carousel
+        nextArrow.addEventListener('click', () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
+        });
+
+        prevArrow.addEventListener('click', () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                stopAutoSlide();
+                goToSlide(parseInt(dot.getAttribute('data-index')));
+                startAutoSlide();
+            });
+        });
+
+        // Event listeners for photo next buttons
+        photoNextBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                stopAutoSlide();
+                goToSlide(parseInt(btn.getAttribute('data-next')));
+                startAutoSlide();
+            });
+        });
+
+        // Touch/swipe support for mobile
+        let teamStartX = 0;
+        let teamEndX = 0;
+
+        teamCarousel.addEventListener('touchstart', (e) => {
+            teamStartX = e.touches[0].clientX;
+            stopAutoSlide();
+        });
+
+        teamCarousel.addEventListener('touchmove', (e) => {
+            teamEndX = e.touches[0].clientX;
+        });
+
+        teamCarousel.addEventListener('touchend', () => {
+            const diff = teamStartX - teamEndX;
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+            startAutoSlide();
+        });
+
+        // Start auto-slide on page load
+        startAutoSlide();
+
+        // Pause auto-slide on hover
+        teamCarousel.addEventListener('mouseenter', stopAutoSlide);
+        teamCarousel.addEventListener('mouseleave', startAutoSlide);
 
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.querySelector('.intro-video');
@@ -1474,7 +1633,7 @@
             demoVideoWrapper.addEventListener('click', function(e) {
                 // Only redirect if the click wasn't on the YouTube link itself
                 if (e.target !== youtubeRedirect && !youtubeRedirect.contains(e.target)) {
-                    window.open('https://youtu.be/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv', '_blank');
+                    window.open('https://youtu.be/kq6OLT-7DpI', '_blank');
                 }
             });
             
@@ -1592,14 +1751,14 @@
         
         const carouselWrapper = document.getElementById('carouselWrapper');
         const carousel = document.getElementById('techCarousel');
-        let startX = 0;
+        let techStartX = 0;
         let scrollLeft = 0;
         let isDown = false;
 
         if (carouselWrapper && carousel) {
             carouselWrapper.addEventListener('touchstart', (e) => {
                 isDown = true;
-                startX = e.touches[0].pageX;
+                techStartX = e.touches[0].pageX;
                 carousel.style.animationPlayState = 'paused';
             });
 
@@ -1607,11 +1766,11 @@
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.touches[0].pageX;
-                const walk = (startX - x) * 2;
+                const walk = (techStartX - x) * 2;
                 const currentTransform = carousel.style.transform;
                 const currentX = currentTransform ? parseFloat(currentTransform.match(/-?\d+\.?\d*/)) : 0;
                 carousel.style.transform = `translateX(${currentX - walk}px)`;
-                startX = x;
+                techStartX = x;
             });
 
             carouselWrapper.addEventListener('touchend', () => {
@@ -1623,7 +1782,7 @@
 
             carouselWrapper.addEventListener('mousedown', (e) => {
                 isDown = true;
-                startX = e.pageX;
+                techStartX = e.pageX;
                 carousel.style.animationPlayState = 'paused';
                 carouselWrapper.style.cursor = 'grabbing';
             });
@@ -1632,11 +1791,11 @@
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX;
-                const walk = (startX - x) * 2;
+                const walk = (techStartX - x) * 2;
                 const currentTransform = carousel.style.transform;
                 const currentX = currentTransform ? parseFloat(currentTransform.match(/-?\d+\.?\d*/)) : 0;
                 carousel.style.transform = `translateX(${currentX - walk}px)`;
-                startX = x;
+                techStartX = x;
             });
 
             carouselWrapper.addEventListener('mouseup', () => {
