@@ -473,6 +473,53 @@
             }
         }
         
+        /* Demo Section Styles */
+        .demo-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 70%;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .demo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f3c46e, #e6b258);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .demo-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .demo-placeholder h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .demo-placeholder p {
+            font-size: 1.1rem;
+            max-width: 80%;
+            text-align: center;
+        }
+        
         /* Team Section Styles */
         .team-grid {
             display: grid;
@@ -577,6 +624,10 @@
             background-color: #ffffff;
         }
         
+        #demo {
+            background-color: #ffffff;
+        }
+        
         #team {
             background-color: #ffffff;
         }
@@ -588,6 +639,30 @@
             text-align: center;
             color: black;
             font-size: 14px;
+        }
+        
+        /* New styles for left-aligned sections */
+        #technologies .section-content,
+        #demo .section-content {
+            max-width: none;
+            width: 100%;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        #technologies .section-content h1,
+        #demo .section-content h1 {
+            text-align: left;
+            width: 100%;
+        }
+        
+        #technologies .section-content p,
+        #demo .section-content p {
+            text-align: left;
+            width: 100%;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         /* New styles for left-aligned team section */
@@ -606,6 +681,9 @@
         #team .section-content p {
             text-align: left;
             width: 100%;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         /* Center team member images */
@@ -690,10 +768,13 @@
                 display: none;
             }
             
+            /* Mobile-optimized section spacing */
             .section {
                 padding: 100px 20px 40px 20px;
                 min-height: 100vh;
-                height: 100vh;
+                height: auto;
+                justify-content: flex-start;
+                padding-top: 120px;
             }
             
             .section h1 {
@@ -703,6 +784,7 @@
             
             .section p {
                 font-size: 1rem;
+                margin-bottom: 20px;
             }
             
             .section-content.with-mockup {
@@ -722,6 +804,7 @@
                 margin-left: -20px;
                 margin-right: -20px;
                 padding: 0 20px;
+                margin-top: 30px;
             }
             
             .mockup-container {
@@ -732,6 +815,7 @@
             
             .app-title {
                 font-size: 2.8rem;
+                margin-bottom: 15px;
             }
             
             .video-text {
@@ -744,9 +828,27 @@
                 opacity: 1;
             }
             
+            .demo-container {
+                height: 300px;
+                margin-top: 20px;
+            }
+            
+            .demo-placeholder i {
+                font-size: 3rem;
+            }
+            
+            .demo-placeholder h3 {
+                font-size: 1.5rem;
+            }
+            
+            .demo-placeholder p {
+                font-size: 1rem;
+            }
+            
             .team-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
+                margin-top: 30px;
             }
             
             .member-photo-wrapper {
@@ -759,16 +861,22 @@
                 min-height: 100vh;
             }
             
-            /* Keep team text left-aligned on mobile */
+            /* Keep all text left-aligned on mobile */
+            #technologies .section-content,
+            #demo .section-content,
             #team .section-content {
                 align-items: flex-start;
                 text-align: left;
             }
             
+            #technologies .section-content h1,
+            #demo .section-content h1,
             #team .section-content h1 {
                 text-align: left;
             }
             
+            #technologies .section-content p,
+            #demo .section-content p,
             #team .section-content p {
                 text-align: left;
             }
@@ -795,6 +903,9 @@
             
             .section {
                 padding: 90px 15px 30px 15px;
+                min-height: 100vh;
+                height: auto;
+                padding-top: 100px;
             }
             
             .section h1 {
@@ -805,6 +916,7 @@
             .section p {
                 font-size: 0.95rem;
                 line-height: 1.6;
+                margin-bottom: 15px;
             }
             
             .nav-link {
@@ -822,6 +934,7 @@
             
             .app-title {
                 font-size: 2.2rem;
+                margin-bottom: 10px;
             }
             
             .tech-logo {
@@ -838,11 +951,29 @@
             .tech-carousel-wrapper {
                 width: 100%;
                 max-width: 100%;
+                margin-top: 20px;
             }
             
             .video-text {
                 font-size: 1.5rem;
                 max-width: 90%;
+            }
+            
+            .demo-container {
+                height: 250px;
+                margin-top: 15px;
+            }
+            
+            .demo-placeholder i {
+                font-size: 2.5rem;
+            }
+            
+            .demo-placeholder h3 {
+                font-size: 1.3rem;
+            }
+            
+            .demo-placeholder p {
+                font-size: 0.9rem;
             }
             
             .member-photo-wrapper {
@@ -858,6 +989,44 @@
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
+            }
+            
+            .team-grid {
+                gap: 25px;
+                margin-top: 25px;
+            }
+        }
+        
+        /* Extra small devices */
+        @media screen and (max-width: 360px) {
+            .section {
+                padding: 80px 10px 20px 10px;
+                padding-top: 90px;
+            }
+            
+            .section h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section p {
+                font-size: 0.9rem;
+            }
+            
+            .app-title {
+                font-size: 2rem;
+            }
+            
+            .demo-container {
+                height: 200px;
+            }
+            
+            .team-grid {
+                gap: 20px;
+            }
+            
+            .member-photo-wrapper {
+                width: 140px;
+                height: 140px;
             }
         }
     </style>
@@ -883,6 +1052,9 @@
             </li>
             <li class="nav-item">
                 <a href="#technologies" class="nav-link">Technologies</a>
+            </li>
+            <li class="nav-item">
+                <a href="#demo" class="nav-link">Demo</a>
             </li>
             <li class="nav-item">
                 <a href="#team" class="nav-link">Team</a>
@@ -913,8 +1085,13 @@
             <div class="timeline-dot"></div>
             <div class="timeline-title">Technologies</div>
         </div>
-        <div class="timeline-item" data-section="team">
+        <div class="timeline-item" data-section="demo">
             <div class="timeline-number">05</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Demo</div>
+        </div>
+        <div class="timeline-item" data-section="team">
+            <div class="timeline-number">06</div>
             <div class="timeline-dot"></div>
             <div class="timeline-title">Team</div>
         </div>
@@ -955,39 +1132,78 @@
     </section>
     
     <section id="technologies" class="section">
-        <div class="section-content with-mockup">
-            <div class="solution-text">
-                <h1>Technologies</h1>
-                <p>We're utilizing <span style="color: #f3c46e; font-weight: 600;">modern web technologies</span> to build a <span style="color: #f3c46e; font-weight: 600;">scalable</span> and <span style="color: #f3c46e; font-weight: 600;">efficient platform</span>. Our <span style="color: #f3c46e; font-weight: 600;">tech stack</span> ensures <span style="color: #f3c46e; font-weight: 600;">reliability</span>, <span style="color: #f3c46e; font-weight: 600;">performance</span>, and <span style="color: #f3c46e; font-weight: 600;">accessibility</span> across all devices.</p>
+        <div class="section-content">
+            <h1>Technologies</h1>
+            <p>We're utilizing <span style="color: #f3c46e; font-weight: 600;">modern web technologies</span> to build a <span style="color: #f3c46e; font-weight: 600;">scalable</span> and <span style="color: #f3c46e; font-weight: 600;">efficient platform</span>. Our <span style="color: #f3c46e; font-weight: 600;">tech stack</span> ensures <span style="color: #f3c46e; font-weight: 600;">reliability</span>, <span style="color: #f3c46e; font-weight: 600;">performance</span>, and <span style="color: #f3c46e; font-weight: 600;">accessibility</span> across all devices.</p>
             
-                <div class="tech-carousel-wrapper" id="carouselWrapper">
-                    <div class="tech-carousel" id="techCarousel">
-                        <!-- First set of logos -->
-                        <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
-                        <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
-                        <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
-                        <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
-                        <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
-                        <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
-                        <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
-                        <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
-                        <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
-                        <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
-                        <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
-                        
-                        <!-- Duplicate set for seamless loop -->
-                        <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
-                        <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
-                        <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
-                        <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
-                        <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
-                        <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
-                        <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
-                        <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
-                        <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
-                        <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
-                        <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
-                        </div>
+            <div class="tech-carousel-wrapper" id="carouselWrapper">
+                <div class="tech-carousel" id="techCarousel">
+                    <!-- First set of logos -->
+                    <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
+                    <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
+                    <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
+                    <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
+                    <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
+                    <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
+                    <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
+                    <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
+                    <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
+                    <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
+                    <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
+                    
+                    <!-- New technology logos -->
+                    <img src="c12-Photoroom.png" alt="Technology 12" class="tech-logo">
+                    <img src="c13-Photoroom.png" alt="Technology 13" class="tech-logo">
+                    <img src="c14-Photoroom.png" alt="Technology 14" class="tech-logo">
+                    <img src="c15-Photoroom.png" alt="Technology 15" class="tech-logo">
+                    <img src="c16-Photoroom.png" alt="Technology 16" class="tech-logo">
+                    <img src="c17-Photoroom.png" alt="Technology 17" class="tech-logo">
+                    <img src="c19-Photoroom.png" alt="Technology 19" class="tech-logo">
+                    <img src="c20-Photoroom.png" alt="Technology 20" class="tech-logo">
+                    <img src="c21-Photoroom.png" alt="Technology 21" class="tech-logo">
+                    <img src="c22-Photoroom.png" alt="Technology 22" class="tech-logo">
+                    <img src="c23-Photoroom.png" alt="Technology 23" class="tech-logo">
+                    <img src="c24-Photoroom.png" alt="Technology 23" class="tech-logo">
+                    
+                    <!-- Duplicate set for seamless loop -->
+                    <img src="c1-Photoroom.png" alt="Technology 1" class="tech-logo">
+                    <img src="c2-Photoroom.png" alt="Technology 2" class="tech-logo">
+                    <img src="c3-Photoroom.png" alt="Technology 3" class="tech-logo">
+                    <img src="c4-Photoroom.png" alt="Technology 4" class="tech-logo">
+                    <img src="c5-Photoroom.png" alt="Technology 5" class="tech-logo">
+                    <img src="c6-Photoroom.png" alt="Technology 6" class="tech-logo">
+                    <img src="c7-Photoroom.png" alt="Technology 7" class="tech-logo">
+                    <img src="c8-Photoroom.png" alt="Technology 8" class="tech-logo">
+                    <img src="c9-Photoroom.png" alt="Technology 9" class="tech-logo">
+                    <img src="c10-Photoroom.png" alt="Technology 10" class="tech-logo">
+                    <img src="c11-Photoroom.png" alt="Technology 11" class="tech-logo">
+                    <img src="c12-Photoroom.png" alt="Technology 12" class="tech-logo">
+                    <img src="c13-Photoroom.png" alt="Technology 13" class="tech-logo">
+                    <img src="c14-Photoroom.png" alt="Technology 14" class="tech-logo">
+                    <img src="c15-Photoroom.png" alt="Technology 15" class="tech-logo">
+                    <img src="c16-Photoroom.png" alt="Technology 16" class="tech-logo">
+                    <img src="c17-Photoroom.png" alt="Technology 17" class="tech-logo">
+                    <img src="c19-Photoroom.png" alt="Technology 19" class="tech-logo">
+                    <img src="c20-Photoroom.png" alt="Technology 20" class="tech-logo">
+                    <img src="c21-Photoroom.png" alt="Technology 21" class="tech-logo">
+                    <img src="c22-Photoroom.png" alt="Technology 22" class="tech-logo">
+                    <img src="c23-Photoroom.png" alt="Technology 23" class="tech-logo">
+                     <img src="c24-Photoroom.png" alt="Technology 23" class="tech-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="demo" class="section">
+        <div class="section-content">
+            <h1>Demo</h1>
+            <p>Watch our <span style="color: #f3c46e; font-weight: 600;">product demonstration</span> to see how SIZA works in action.</p>
+            
+            <div class="demo-container">
+                <div class="demo-placeholder">
+                    <i class="bi bi-play-circle-fill"></i>
+                    <h3>Product Demo Video</h3>
+                    <p>This space is reserved for our product demonstration video. The video will showcase the key features and functionality of the SIZA platform.</p>
                 </div>
             </div>
         </div>
