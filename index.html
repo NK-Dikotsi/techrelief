@@ -1249,13 +1249,13 @@
             <div class="demo-container">
                 <div class="video-wrapper">
                     <!-- YouTube thumbnail image as background -->
-                    <img src="https://img.youtube.com/vi/1_h9C7glzBo/maxresdefault.jpg" alt="SIZA Demo Video Thumbnail" class="video-thumbnail">
+                    <img src="siza.png" alt="SIZA Demo Video Thumbnail" class="video-thumbnail">
                     
                     <!-- Play button overlay -->
                     <div class="play-button-overlay" id="playButton"></div>
                     
                     <!-- YouTube redirect link -->
-                    <a href="https://youtu.be/1_h9C7glzBo?si=RVs5zVn7P9E6hgd7" target="_blank" class="youtube-redirect">
+                    <a href="https://youtu.be/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv" target="_blank" class="youtube-redirect">
                         Watch on YouTube
                     </a>
                 </div>
@@ -1464,14 +1464,14 @@
             videoWrapper.addEventListener('click', function(e) {
                 // Only redirect if the click wasn't on the YouTube link itself
                 if (e.target !== youtubeRedirect && !youtubeRedirect.contains(e.target)) {
-                    window.open('https://youtu.be/1_h9C7glzBo?si=RVs5zVn7P9E6hgd7', '_blank');
+                    window.open('https://youtu.be/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv', '_blank');
                 }
             });
             
             // Also make the play button redirect to YouTube
             playButton.addEventListener('click', function(e) {
                 e.stopPropagation(); // Prevent the video wrapper click event
-                window.open('https://youtu.be/1_h9C7glzBo?si=RVs5zVn7P9E6hgd7', '_blank');
+                window.open('https://youtu.be/IOjIOCO9Jzw?si=KSjL0sIjFcV1Diqv', '_blank');
             });
             
             video.addEventListener('loadedmetadata', function() {
